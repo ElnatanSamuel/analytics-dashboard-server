@@ -11,4 +11,19 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/test-user', async (req, res) => {
+  try {
+    const testUser = await User.findOne({ email: 'user1@gmail.com' });
+    res.json({
+      exists: !!testUser,
+      user: testUser ? {
+        email: testUser.email,
+        password: testUser.password
+      } : null
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

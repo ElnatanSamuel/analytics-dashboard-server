@@ -16,6 +16,7 @@ const corsOptions = {
 
 // Basic CORS setup
 app.use(cors(corsOptions));
+app.use(express.json());
 
 // Additional headers for all responses
 app.use((req, res, next) => {
