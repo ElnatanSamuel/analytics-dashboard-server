@@ -28,7 +28,7 @@ next();
 
 
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect("mongodb+srv://ktk2real:krosection999@cluster0.abfalpl.mongodb.net/internshiptest?retryWrites=true&w=majority")
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
