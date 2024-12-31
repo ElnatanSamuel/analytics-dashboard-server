@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-
+const app = express();
 
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://analytics-dashboard-client.vercel.app'],
@@ -26,7 +26,7 @@ res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 next();
 });
 
-const app = express();
+
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
