@@ -5,12 +5,28 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const app = express();
 
-app.use(cors({
-  origin: 'https://analytics-dashboard-client.vercel.app/'
-}));
-app.use(express.json());
+
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://analytics-dashboard-client.vercel.app'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+// Basic CORS setup
+app.use(cors(corsOptions));
+
+// Additional headers for all responses
+app.use((req, res, next) => {
+res.header('Access-Control-Allow-Origin', 'https://analytics-dashboard-client.vercel.app');
+res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+res.header('Access-Control-Allow-Credentials', 'true');
+res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+next();
+});
+
+const app = express();
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
